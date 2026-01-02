@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Gorillas.js</title>
+  <link href="styles/base.css" type="text/css" rel="stylesheet"></link>
+  <script data-main="js/app.js" src="js/require.js"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div class="editor-window">
+        <div class="editor-titlebar">
+          <span class="editor-title">GORILLA.BAS</span>
+          <div class="editor-buttons">
+            <span class="editor-btn">▼</span>
+            <span class="editor-btn">▲</span>
+          </div>
+        </div>
+        <div class="editor-menubar">
+          <span class="menu-item">File</span>
+          <span class="menu-item">Edit</span>
+          <span class="menu-item">View</span>
+          <span class="menu-item">Search</span>
+          <span class="menu-item">Run</span>
+        </div>
+        <div class="editor-content">
+<pre class="qbasic-filler">'Q B a s i c  G o r i l l a s
+DIM SHARED gravity#</pre>
+<pre class="qbasic"><span class="comment">' GRAVITY - Pull on banana</span>
+x# = StartXPos + (InitXVel# * t#)
+y# = StartYPos + (.5 * <input type="text" id="setting_gravity" value="9.8" class="qbasic-input gravity"> * t# ^ 2)
+</pre>
+<pre class="qbasic-filler">IF (x# >= ScrWidth) THEN
+  OnScreen = FALSE
+END IF</pre>
+<pre class="qbasic"><span class="comment">' EXPLOSION - Radius size</span>
+SUB DoExplosion (x#, y#)
+  Radius = ScrHeight / <input type="text" id="setting_explosion" value="50" class="qbasic-input explosion"></pre>
+<pre class="qbasic-filler">  FOR c# = 0 TO Radius
+    CIRCLE (x#, y#), c#
+  NEXT c#
+END SUB</pre>
+<pre class="qbasic"><span class="comment">' SPEED - Banana velocity</span>
+DO WHILE NOT Impact
+  t# = t# + <input type="text" id="setting_speed" value=".1" class="qbasic-input speed">
+LOOP</pre>
+<pre class="qbasic-filler">END SUB
+FUNCTION Scl (n!)
+  Scl = CINT(n! / 2)
+END FUNCTION</pre>
+        </div>
+      </div>
+      <div id="container">
+        <div class="players">
+          <div id="player_1">
+            Player 1
+            <br/>
+            <label
+                for="player_1_angle"
+                style='float: left;'
+            >
+                Angle:
+            </label>
+            <input id="player_1_angle" maxlength="3">
+            <br/>
+            <label
+                for="player_1_velocity"
+                style='float: left;'
+            >
+                Velocity:
+            </label>
+            <input id="player_1_velocity" maxlength="3">
+          </div>
+          <div id="player_2">
+            Player 2
+            <br/>
+            <label
+                for="player_2_angle"
+                style='float: left;'
+            >
+                Angle:
+            </label>
+            <input id="player_2_angle" maxlength="3">
+            <br/>
+            <label
+                for="player_2_velocity"
+                style='float: left;'
+            >
+                Velocity:
+            </label>
+            <input id="player_2_velocity" maxlength="3">
+          </div>
+        </div>
+        <canvas id="canvas" width="640" height="350">
+          <p>Browser does not support the canvas tag</p>
+        </canvas>
+      </div>
+    </div>
+  </body>
+</html>

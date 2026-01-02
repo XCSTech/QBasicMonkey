@@ -1,0 +1,211 @@
+/* Main Styles */
+
+body {
+  background-color: aliceblue;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: courier;
+}
+
+#wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 15px;
+  margin: 50px auto;
+  width: fit-content;
+}
+
+#container {
+  width: 650px;
+  height: 360px;
+  position: relative;
+  border-radius: 10px;
+  background: #000;
+}
+
+.players {
+  position: absolute;
+  padding: 10px;
+  width: 630px;
+}
+
+#player_1 {
+  text-align: left;
+  float: left;
+  width: 300px;
+}
+
+#player_2 {
+  text-align: right;
+  float: right;
+  width: 200px;
+}
+
+label {
+  margin-right: 8px;
+  clear: left;
+  font-size: 12px;
+  line-height: 32px;
+}
+
+input {
+  background: #000080;
+  width: 80px;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: courier;
+  padding: 4px 8px;
+  margin-bottom: 6px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #ffff00;
+  box-shadow: 0 0 8px #ffff00;
+}
+
+#canvas {
+  background-color: #0000a0;
+  margin: 0 auto;
+  border: 5px solid #000;
+  border-radius: 15px;
+}
+
+.editor-window {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  height: 360px;
+  background: #c0c0c0;
+  border: 2px solid #fff;
+  border-right-color: #808080;
+  border-bottom-color: #808080;
+  box-shadow: 1px 1px 0 #000;
+}
+
+.editor-titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #000080, #1084d0);
+  color: #fff;
+  padding: 2px 4px;
+  font-family: "MS Sans Serif", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.editor-title {
+  flex: 1;
+}
+
+.editor-buttons {
+  display: flex;
+  gap: 2px;
+}
+
+.editor-btn {
+  background: #c0c0c0;
+  color: #000;
+  width: 16px;
+  height: 14px;
+  font-size: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #fff;
+  border-right-color: #808080;
+  border-bottom-color: #808080;
+}
+
+.editor-menubar {
+  display: flex;
+  gap: 0;
+  background: #c0c0c0;
+  padding: 2px 4px;
+  font-family: "MS Sans Serif", Arial, sans-serif;
+  font-size: 11px;
+  border-bottom: 1px solid #808080;
+}
+
+.menu-item {
+  padding: 1px 8px;
+  color: #000;
+}
+
+.menu-item:first-child {
+  text-decoration: underline;
+}
+
+.editor-content {
+  flex: 1;
+  background: #0000aa;
+  overflow: hidden;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.editor-content pre {
+  margin: 0;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+  line-height: 1.4;
+  white-space: pre;
+  background: transparent;
+}
+
+.editor-content pre.qbasic-filler {
+  color: #6666cc;
+}
+
+.editor-content pre.qbasic {
+  color: #ffffff;
+}
+
+.editor-content .comment {
+  color: #55ff55;
+  font-style: italic;
+}
+
+.editor-content s {
+  color: #888888;
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.qbasic-input {
+  background: #ffff00;
+  border: none;
+  color: #000080;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 0 2px;
+  text-align: center;
+}
+
+.qbasic-input:focus {
+  outline: 2px solid #fff;
+  background: #ffff55;
+}
+
+.qbasic-input.gravity {
+  width: 3.5ch;
+}
+
+.qbasic-input.explosion {
+  width: 4ch;
+}
+
+.qbasic-input.speed {
+  width: 2.5ch;
+}
