@@ -772,16 +772,76 @@
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            gap: 15px;
+            gap: 20px;
             width: fit-content;
+            padding: 20px;
+          }
+
+          .game-window {
+            display: flex;
+            flex-direction: column;
+            background: #c0c0c0;
+            border: 2px solid #fff;
+            border-right-color: #808080;
+            border-bottom-color: #808080;
+            box-shadow: 1px 1px 0 #000;
+          }
+
+          .game-titlebar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(90deg, #000080, #1084d0);
+            color: #fff;
+            padding: 2px 4px;
+            font-family: "MS Sans Serif", Arial, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+          }
+
+          .game-title {
+            flex: 1;
+          }
+
+          .game-buttons {
+            display: flex;
+            gap: 2px;
+          }
+
+          .game-btn {
+            background: #c0c0c0;
+            color: #000;
+            width: 16px;
+            height: 14px;
+            font-size: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #fff;
+            border-right-color: #808080;
+            border-bottom-color: #808080;
+          }
+
+          .game-menubar {
+            display: flex;
+            gap: 0;
+            background: #c0c0c0;
+            padding: 2px 4px;
+            font-family: "MS Sans Serif", Arial, sans-serif;
+            font-size: 11px;
+            border-bottom: 1px solid #808080;
+          }
+
+          .game-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
           }
 
           .container {
             width: 650px;
             height: 360px;
             position: relative;
-            border-radius: 10px;
-            background: #000;
           }
 
           .players {
@@ -833,8 +893,6 @@
           canvas {
             background-color: #0000a0;
             margin: 0 auto;
-            border: 5px solid #000;
-            border-radius: 15px;
           }
 
           .editor-window {
@@ -962,6 +1020,131 @@
           .qbasic-input.speed {
             width: 2.5ch;
           }
+
+          /* Mobile responsive layout */
+          @media (max-width: 800px) {
+            :host {
+              width: 100%;
+              max-width: 100vw;
+              overflow-x: hidden;
+            }
+
+            .wrapper {
+              flex-direction: column;
+              align-items: center;
+              width: 100%;
+              max-width: 100vw;
+              padding: 0;
+              box-sizing: border-box;
+              overflow-x: hidden;
+            }
+
+            .editor-window {
+              order: 2;
+              width: 100%;
+              margin: 10px 0;
+              box-sizing: border-box;
+              height: auto;
+              min-height: 250px;
+              display: none;
+            }
+
+            .game-wrapper {
+              order: 1;
+              width: 100%;
+              overflow: hidden;
+            }
+
+            .game-window {
+              width: 100%;
+            }
+
+            .container {
+              width: 100%;
+              max-width: 100vw;
+              height: auto;
+              aspect-ratio: 650 / 360;
+              margin: 0;
+              box-sizing: border-box;
+            }
+
+            .container canvas {
+              width: 100%;
+              max-width: 100vw;
+              height: auto;
+              border-radius: 8px;
+              box-sizing: border-box;
+            }
+
+            .players {
+              width: 100%;
+              font-size: 10px;
+              display: flex;
+              justify-content: space-between;
+              padding: 5px;
+              box-sizing: border-box;
+            }
+
+            .players .player-1,
+            .players .player-2 {
+              width: auto;
+              float: none;
+              text-align: left;
+            }
+
+            .players label {
+              font-size: 10px;
+              line-height: 20px;
+              margin-right: 4px;
+            }
+
+            .players input {
+              width: 40px;
+              font-size: 10px;
+              padding: 2px 4px;
+              margin-bottom: 3px;
+            }
+
+            .autoplay-btn {
+              font-size: 11px;
+              padding: 3px 12px;
+            }
+          }
+
+          .autoplay-btn {
+            background: #c0c0c0;
+            color: #000;
+            border: none;
+            border-top: 2px solid #fff;
+            border-left: 2px solid #fff;
+            border-right: 2px solid #808080;
+            border-bottom: 2px solid #808080;
+            box-shadow: 1px 1px 0 #000, inset 1px 1px 0 #dfdfdf;
+            padding: 4px 16px;
+            font-family: "MS Sans Serif", Arial, sans-serif;
+            font-size: 12px;
+            cursor: pointer;
+            margin-top: 10px;
+          }
+
+          .autoplay-btn:hover {
+            background: #d4d4d4;
+          }
+
+          .autoplay-btn:active {
+            border-top: 2px solid #808080;
+            border-left: 2px solid #808080;
+            border-right: 2px solid #fff;
+            border-bottom: 2px solid #fff;
+            box-shadow: none;
+            padding: 5px 15px 3px 17px;
+          }
+
+          .autoplay-btn:disabled {
+            color: #808080;
+            text-shadow: 1px 1px 0 #fff;
+            cursor: not-allowed;
+          }
         </style>
 
         <div class="wrapper">
@@ -969,8 +1152,8 @@
             <div class="editor-titlebar">
               <span class="editor-title">GORILLA.BAS</span>
               <div class="editor-buttons">
-                <span class="editor-btn">▼</span>
-                <span class="editor-btn">▲</span>
+                <span class="editor-btn">_</span>
+                <span class="editor-btn">X</span>
               </div>
             </div>
             <div class="editor-menubar">
@@ -985,21 +1168,21 @@
 DIM SHARED gravity#</pre>
               <pre class="qbasic"><span class="comment">' GRAVITY - Pull on banana</span>
 x# = StartXPos + (InitXVel# * t#)
-y# = StartYPos + (.5 * <input type="text" class="qbasic-input gravity" value="9.8"> * t# ^ 2)
+y# = StartYPos + (.5 * <input type="text" class="qbasic-input gravity" value="9.8"> * t# ^ 2)<i><span style='color: red;'><-Edit Me</span></i>
 </pre>
               <pre class="qbasic-filler">IF (x# >= ScrWidth) THEN
   OnScreen = FALSE
 END IF</pre>
               <pre class="qbasic"><span class="comment">' EXPLOSION - Radius size</span>
 SUB DoExplosion (x#, y#)
-  Radius = ScrHeight / <input type="text" class="qbasic-input explosion" value="50"></pre>
+  Radius = ScrHeight / <input type="text" class="qbasic-input explosion" value="50"><i><span style='color: red;'><-Edit Me</span></i></pre>
               <pre class="qbasic-filler">  FOR c# = 0 TO Radius
     CIRCLE (x#, y#), c#
   NEXT c#
 END SUB</pre>
               <pre class="qbasic"><span class="comment">' SPEED - Banana velocity</span>
 DO WHILE NOT Impact
-  t# = t# + <input type="text" class="qbasic-input speed" value=".1">
+  t# = t# + <input type="text" class="qbasic-input speed" value=".1"><i><span style='color: red;'><-Edit Me</span></i>
 LOOP</pre>
               <pre class="qbasic-filler">END SUB
 FUNCTION Scl (n!)
@@ -1007,28 +1190,50 @@ FUNCTION Scl (n!)
 END FUNCTION</pre>
             </div>
           </div>
-          <div class="container">
-            <div class="players">
-              <div class="player-1">
-                Player 1
-                <br/>
-                <label style="float: left;">Angle:</label>
-                <input class="player-angle" data-player="1" maxlength="3">
-                <br/>
-                <label style="float: left;">Velocity:</label>
-                <input class="player-velocity" data-player="1" maxlength="3">
+          <div class="game-wrapper">
+            <div class="game-window">
+              <div class="game-titlebar">
+                <span class="game-title">GORILLA.BAS - QBasic</span>
+                <div class="game-buttons">
+                  <span class="game-btn">_</span>
+                  <span class="game-btn">X</span>
+                </div>
               </div>
-              <div class="player-2">
-                Player 2
-                <br/>
-                <label style="float: left;">Angle:</label>
-                <input class="player-angle" data-player="2" maxlength="3">
-                <br/>
-                <label style="float: left;">Velocity:</label>
-                <input class="player-velocity" data-player="2" maxlength="3">
+              <div class="game-menubar">
+                <span class="menu-item">File</span>
+                <span class="menu-item">Edit</span>
+                <span class="menu-item">View</span>
+                <span class="menu-item">Search</span>
+                <span class="menu-item">Run</span>
+                <span class="menu-item">Debug</span>
+                <span class="menu-item">Options</span>
+                <span class="menu-item">Help</span>
+              </div>
+              <div class="container">
+                <div class="players">
+                  <div class="player-1">
+                    Player 1
+                    <br/>
+                    <label style="float: left;">Angle:</label>
+                    <input class="player-angle" data-player="1" maxlength="3">
+                    <br/>
+                    <label style="float: left;">Velocity:</label>
+                    <input class="player-velocity" data-player="1" maxlength="3">
+                  </div>
+                  <div class="player-2">
+                    Player 2
+                    <br/>
+                    <label style="float: left;">Angle:</label>
+                    <input class="player-angle" data-player="2" maxlength="3">
+                    <br/>
+                    <label style="float: left;">Velocity:</label>
+                    <input class="player-velocity" data-player="2" maxlength="3">
+                  </div>
+                </div>
+                <canvas width="640" height="350"></canvas>
               </div>
             </div>
-            <canvas width="640" height="350"></canvas>
+            <button class="autoplay-btn">Let Me Play</button>
           </div>
         </div>
       `;
@@ -1116,8 +1321,91 @@ END FUNCTION</pre>
         if (!isNaN(val)) this.gameSettings.bananaSpeed = val;
       });
 
+      // Autoplay button
+      const autoplayBtn = this.shadowRoot.querySelector('.autoplay-btn');
+      this.autoplayActive = false;
+
+      autoplayBtn.addEventListener('click', () => {
+        if (this.autoplayActive) {
+          this.stopAutoplay();
+          autoplayBtn.textContent = 'Enable Autoplay';
+        } else {
+          this.startAutoplay();
+          autoplayBtn.textContent = 'Let Me Play';
+        }
+      });
+
       // Start the game
       this.app.createScene();
+
+      // Start autoplay by default
+      this.startAutoplay();
+    }
+
+    startAutoplay() {
+      this.autoplayActive = true;
+      this.runAutoplayTurn();
+    }
+
+    stopAutoplay() {
+      this.autoplayActive = false;
+      if (this.autoplayTimeout) {
+        clearTimeout(this.autoplayTimeout);
+        this.autoplayTimeout = null;
+      }
+    }
+
+    runAutoplayTurn() {
+      if (!this.autoplayActive) return;
+
+      // Find which player's turn it is
+      const p1AngleVisible = this.playerInputs.player_1.angle.style.display !== 'none';
+      const p2AngleVisible = this.playerInputs.player_2.angle.style.display !== 'none';
+
+      let currentPlayer;
+      if (p1AngleVisible) {
+        currentPlayer = 'player_1';
+      } else if (p2AngleVisible) {
+        currentPlayer = 'player_2';
+      } else {
+        // Wait and check again
+        this.autoplayTimeout = setTimeout(() => this.runAutoplayTurn(), 500);
+        return;
+      }
+
+      const angleInput = this.playerInputs[currentPlayer].angle;
+      const velocityInput = this.playerInputs[currentPlayer].velocity;
+
+      // Random angle 10-70, velocity 10-35
+      const angle = Math.floor(Math.random() * 61) + 10;
+      const velocity = Math.floor(Math.random() * 26) + 10;
+
+      // Step 1: Type angle (after 1 second)
+      this.autoplayTimeout = setTimeout(() => {
+        if (!this.autoplayActive) return;
+        angleInput.value = angle;
+
+        // Step 2: Press enter on angle (after 1 second)
+        this.autoplayTimeout = setTimeout(() => {
+          if (!this.autoplayActive) return;
+          angleInput.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 13 }));
+
+          // Step 3: Type velocity (after 1 second)
+          this.autoplayTimeout = setTimeout(() => {
+            if (!this.autoplayActive) return;
+            velocityInput.value = velocity;
+
+            // Step 4: Press enter on velocity (after 1 second)
+            this.autoplayTimeout = setTimeout(() => {
+              if (!this.autoplayActive) return;
+              velocityInput.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 13 }));
+
+              // Schedule next turn
+              this.autoplayTimeout = setTimeout(() => this.runAutoplayTurn(), 2000);
+            }, 1000);
+          }, 1000);
+        }, 1000);
+      }, 1000);
     }
 
     hidePlayerField(player, field) {
